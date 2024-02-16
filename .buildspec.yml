@@ -1,0 +1,46 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo Executing install phase
+    # finally:
+      # - echo Executing install phase COMPLETE
+      # - echo //npm.pkg.github.com/:_authToken=$NPMRC_TOKEN > ~/.npmrc
+  pre_build:
+    commands:
+      # - cd client
+      # - npm install
+  build:
+    commands:
+      # - npm run build
+      # - cd ..
+      - cd server
+      - npm install
+  post_build:
+    commands:
+      - cd ..
+      - mkdir temp
+      # - mkdir temp/build
+      # - mkdir temp/build/zezenya
+      # - cp -R ./client/build/* temp/build/zezenya
+      # - cp -R ./server temp/build/zezenya/server
+      # - cp -R ./appspec.yml temp/appspec.yml
+      # - cp -R ./awsCICD temp/awsCICD
+      # 
+      # - cp -R ./client/build/* temp
+      - cp -R ./server temp/server
+      - cp -R ./appspec.yml temp/appspec.yml
+      - cp -R ./scripts temp/scripts
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: "temp"
+
+#   discard-paths: yes
+
+  # post_build:
+    # commands:
+      # - aws s3 cp --recursive ./build s3://zezenya.ae/
