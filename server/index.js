@@ -34,6 +34,7 @@ const server = net.createServer(connection => {
 
     connection.on('data', data => {
         console.log('data', `${data} \r\n`);
+        console.log('=====================');
         connection.write('01');
     });
 
