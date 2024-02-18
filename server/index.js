@@ -1,5 +1,7 @@
 // const express = require('express');
+const { Buffer } = require('buffer');
 const net = require('net');
+
 
 const port = 5000;
 // const app = express();
@@ -34,11 +36,22 @@ const server = net.createServer(connection => {
 
     connection.on('data', data => {
         console.log('=====================');
-        console.log('data', `${data} \r\n`);
-        const x = new Uint8Array([0x01]);
-        connection.write(x, 'utf8', (y) => {
-            console.log(' write cb with y: ', y)
-        });
+
+        if (data === '354018112743194') {
+            console.log('IMEI: ', `${data} \r\n`);
+
+            const x = new Uint8Array([0x01]);
+            connection.write(x, 'utf8', (y) => {
+                console.log(' write cb with y: ', y)
+            });
+
+        } else {
+            const buf = Buffer.from(data);
+            const json = JSON.stringify(buf);
+            console.log(json);
+        }
+
+
     });
 
     connection.on('error', data => {
