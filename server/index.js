@@ -37,6 +37,9 @@ const server = net.createServer(connection => {
     connection.on('data', data => {
         console.log('=====================');
         console.log('IMEI: ', `${data} \r\n`);
+        const buf = Buffer.from(data);
+        const json = JSON.stringify(buf);
+        console.log('json', json);
 
         // if (data === '354018112743194') {
         //     console.log('IMEI: ', `${data} \r\n`);
