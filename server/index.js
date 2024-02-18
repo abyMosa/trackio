@@ -35,7 +35,10 @@ const server = net.createServer(connection => {
     connection.on('data', data => {
         console.log('=====================');
         console.log('data', `${data} \r\n`);
-        connection.write('0x01');
+        const x = new Uint8Array([0x01]);
+        connection.write(x, 'utf8', (y) => {
+            console.log(' write cb with y: ', y)
+        });
     });
 
     connection.on('error', data => {
