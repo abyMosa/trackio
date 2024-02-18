@@ -28,7 +28,7 @@ const port = 5000;
 
 
 const server = net.createServer(connection => {
-    console.log('connection', connection);
+    // console.log('connection', connection);
     console.log('new client --- | ' + connection.remoteAddress + '|:|' + connection.remotePort);
 
 
