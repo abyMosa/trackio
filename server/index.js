@@ -33,13 +33,13 @@ const server = net.createServer(connection => {
 
 
     connection.on('data', data => {
-        console.log('data', `${data} \r\n`);
         console.log('=====================');
+        console.log('data', `${data} \r\n`);
         connection.write('01');
     });
 
     connection.on('error', data => {
-        console.log('data', `${data} \r\n`);
+        console.log('error data', `${data} \r\n`);
     });
 
     connection.on('end', () => {
