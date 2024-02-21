@@ -6,13 +6,13 @@ import Wrapper from '@abymosa/develm-sg/dist/components/Wrapper';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import layoutWrapper from "./HOC/layoutWrapper";
 import WithHeader from './HOC/WithHeader';
-// import { Account } from './Components/Account';
+// import { AuthProvider } from './Components/AuthProvider';
 import ChangePassword from './Components/ChangePassword';
 
 function App() {
   return (
     <Wrapper>
-      {/* <Account> */}
+      {/* <AuthProvider> */}
       <Routes>
         <Route path='/register' Component={Signup} />
         <Route path='/login' Component={Login} />
@@ -20,7 +20,7 @@ function App() {
         <Route path='/' Component={layoutWrapper(WithHeader, Home)} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {/* </Account> */}
+      {/* </AuthProvider> */}
     </Wrapper>
 
   );

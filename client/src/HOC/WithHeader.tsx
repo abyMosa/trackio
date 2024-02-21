@@ -3,35 +3,12 @@ import ToolBar from '@abymosa/develm-sg/dist/components/Toolbar'
 import { Container, Row } from '@abymosa/develm-sg/dist/components/Grid'
 import { Link } from 'react-router-dom';
 import { Logo, LogoType } from '@abymosa/develm-sg';
-import { AccountContext } from '../Components/Account';
-import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { useAuth } from '../Components/AuthProvider';
 
 
 const WithHeader = (props: any) => {
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const { getSession, logout } = useContext(AccountContext);
-
-
-  useEffect(() => {
-
-
-    if (user) {
-      return;
-    }
-
-    getSession()
-      .then((x: any) => {
-        // console.log('session', session);
-        console.log('user', x.user);
-        setUser(x.user);
-        // setIsLoggedIn(true);
-      })
-      .catch(() => { });
-
-
-  }, [user]);
+  const { authState, logout } = useAuth();
 
   return (
     <div>
@@ -42,7 +19,7 @@ const WithHeader = (props: any) => {
           render={(text) => <Link to='/'>{text}</Link>}
         />
         <ul>
-          {user ?
+          {authState ?
             <>
               <li> <Link to='/settings' >settings</Link> </li>
               <li className='pointer' onClick={logout}> logout </li>
@@ -67,7 +44,4 @@ const WithHeader = (props: any) => {
 };
 
 export default WithHeader;
-function useStats(arg0: boolean): [any, any] {
-  throw new Error('Function not implemented.');
-}
 

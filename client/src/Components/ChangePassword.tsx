@@ -3,12 +3,12 @@ import { Col, Row } from '@abymosa/develm-sg/dist/components/Grid';
 import Logo, { LogoType } from '@abymosa/develm-sg/dist/components/Logo';
 import { Link } from 'react-router-dom';
 import Form, { Element, ValidationRule } from '@abymosa/develm-sg/dist/components/Form';
-import { AccountContext } from './Account';
+import { AuthContext } from './AuthProvider';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
 const ChangePassword = (props: any) => {
 
-  const { getSession } = useContext(AccountContext);
+  const { getSession } = useContext(AuthContext);
 
   const initialForm = { password: '', newPassword: '' }
   const [form, setForm] = useState(initialForm);

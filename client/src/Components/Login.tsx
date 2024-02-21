@@ -3,7 +3,7 @@ import Form, { Element, ValidationRule } from '@abymosa/develm-sg/dist/component
 import { Col, Row } from '@abymosa/develm-sg/dist/components/Grid'
 import Logo, { LogoType } from '@abymosa/develm-sg/dist/components/Logo'
 import { Link, useNavigate } from 'react-router-dom';
-import { AccountContext } from './Account';
+import { AuthContext } from './AuthProvider';
 
 
 const Login: React.FC = (props) => {
@@ -16,7 +16,7 @@ const Login: React.FC = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
 
-  const { authenticate } = useContext(AccountContext);
+  const { authenticate } = useContext(AuthContext);
 
   const elements: Element[] = [
     { key: 'email', type: 'text', label: 'Email', rules: [ValidationRule.email] },
