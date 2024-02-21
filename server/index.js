@@ -36,7 +36,7 @@ const server = net.createServer(connection => {
 
     connection.on('data', data => {
         console.log('=====================');
-        console.log('IMEI: ', `${data} \r\n`);
+        console.log('IMEI:', `${data} \r\n`);
         const buf = Buffer.from(data);
         const json = JSON.stringify(buf);
         console.log('json', json);
@@ -66,6 +66,12 @@ const server = net.createServer(connection => {
         console.log('client left \r\n\r\n');
     });
 })
+
+
+// const buf = new Buffer.from([0, 15, 51, 53, 52, 48, 49, 56, 49, 49, 50, 55, 52, 51, 49, 57, 52]);
+const buf = new Buffer.from('354018112743194');
+console.log(buf);
+console.log('json', JSON.stringify(buf));
 
 server.listen(port, () => {
     console.log('lisening on port 5000');
