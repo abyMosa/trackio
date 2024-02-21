@@ -29,7 +29,7 @@ const Account = (props: any) => {
               });
             });
 
-            resolve({ user, ...session, ...attributes })
+            resolve({ user, session, attr: attributes })
           }
         })
       } else {

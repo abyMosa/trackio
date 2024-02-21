@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import Form, { Element, ValidationRule } from '@abymosa/develm-sg/dist/components/Form';
 import { Col, Row } from '@abymosa/develm-sg/dist/components/Grid'
 import Logo, { LogoType } from '@abymosa/develm-sg/dist/components/Logo'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AccountContext } from './Account';
 
 
 const Login: React.FC = (props) => {
+
+  const navigate = useNavigate();
 
   const initialForm = { email: '', password: '' }
 
@@ -31,6 +33,8 @@ const Login: React.FC = (props) => {
         // console.log(data);
         setIsLoading(false);
         setForm(initialForm);
+        navigate('/');
+
       })
       .catch((err: any) => {
         setErrors([err.message]);

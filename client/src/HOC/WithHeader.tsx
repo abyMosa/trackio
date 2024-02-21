@@ -4,23 +4,34 @@ import { Container, Row } from '@abymosa/develm-sg/dist/components/Grid'
 import { Link } from 'react-router-dom';
 import { Logo, LogoType } from '@abymosa/develm-sg';
 import { AccountContext } from '../Components/Account';
-import { CognitoUserSession } from 'amazon-cognito-identity-js';
+import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 
 
 const WithHeader = (props: any) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const { getSession, logout } = useContext(AccountContext);
 
+
   useEffect(() => {
+
+
+    if (user) {
+      return;
+    }
+
     getSession()
-      .then((session: CognitoUserSession) => {
+      .then((x: any) => {
         // console.log('session', session);
-        setIsLoggedIn(true);
+        console.log('user', x.user);
+        setUser(x.user);
+        // setIsLoggedIn(true);
       })
       .catch(() => { });
 
-  }, []);
+
+  }, [user]);
 
   return (
     <div>
@@ -31,7 +42,7 @@ const WithHeader = (props: any) => {
           render={(text) => <Link to='/'>{text}</Link>}
         />
         <ul>
-          {isLoggedIn ?
+          {user ?
             <>
               <li> <Link to='/settings' >settings</Link> </li>
               <li className='pointer' onClick={logout}> logout </li>
